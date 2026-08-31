@@ -141,3 +141,14 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+# AI editor artifacts — never commit chat logs or agent state
+.cursor/
+.cursorignore
+.specstory/
+.aider*
+.claude/
+
+# local wallpaper — kept out of the repo
+public/wallpaper/*
+!public/wallpaper/.gitkeep
+!public/wallpaper/README.md
