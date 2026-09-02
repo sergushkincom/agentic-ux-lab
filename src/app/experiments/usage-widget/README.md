@@ -3,7 +3,7 @@
 **The question:** when you're spending a finite allowance, what number do you actually
 need to see?
 
-Live demo → _coming after deploy_
+[Live demo →](https://agentic-ux-lab.vercel.app/experiments/usage-widget)
 
 ## What it is
 
