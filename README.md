@@ -11,9 +11,9 @@ This repo is where those questions get built. One experiment at a time.
 
 ## Experiments
 
-| # | Experiment | The question it answers |
-|---|-----------|-------------------------|
-| 02 | [Usage widget](src/app/experiments/usage-widget) | When you're spending a finite allowance, what number do you actually need to see? |
+| # | Experiment | The question it answers | Demo |
+|---|------------|-------------------------|------|
+| 02 | [Usage widget](src/app/experiments/usage-widget) | When you're spending a finite allowance, what number do you actually need to see? | [Live →](https://agentic-ux-lab.vercel.app/experiments/usage-widget) |
 
 ## Stack
 
