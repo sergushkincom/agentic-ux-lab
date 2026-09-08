@@ -8,6 +8,7 @@ trust, a static comp cannot answer it. So I build the answer first, feel where i
 breaks, and take it back into Figma once the interaction is settled.
 
 This repo is where those questions get built. One experiment at a time.
+
 ![A macOS desktop widget showing Opus will run out about 18 minutes before its limit resets](./preview.png)
 
 *The widget reports the window that runs out first, and says so in time — not percent.*
