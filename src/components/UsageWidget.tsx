@@ -7,15 +7,15 @@ import type {
   Effort,
   Scenario,
   WidgetSize,
-} from "@/lib/data";
+} from "@/app/experiments/usage-widget/data";
 import {
   applyEffortToAll,
   MODEL_ORDER,
   SCENARIO_CONFIG,
   WIDGET_DIMENSIONS,
-} from "@/lib/data";
-import { getAdvisoryLine } from "@/lib/provider-status";
-import { getClosestToLimitModel } from "@/lib/status-copy";
+} from "@/app/experiments/usage-widget/data";
+import { getAdvisoryLine } from "@/app/experiments/usage-widget/provider-status";
+import { getClosestToLimitModel } from "@/app/experiments/usage-widget/status-copy";
 import { useDraggable } from "@/hooks/useDraggable";
 import { ModelRing } from "./ModelRing";
 import { WidgetSmall } from "./widget/widget-small";
@@ -185,6 +185,7 @@ export function UsageWidget({
         open={menu}
         size={size}
         scenario={scenario}
+        boundsRef={desktopRef}
         onClose={closeMenu}
         onSizeChange={handleSizeChange}
         onScenarioChange={onScenarioChange}

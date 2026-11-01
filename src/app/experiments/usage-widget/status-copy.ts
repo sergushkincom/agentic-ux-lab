@@ -1,10 +1,10 @@
-import type { Model, WindowKey } from "@/lib/data";
+import type { Model, WindowKey } from "@/app/experiments/usage-widget/data";
 import {
   getBindingWindow,
   getMinutesUntilEmpty,
   getWindow,
   windowLabel,
-} from "@/lib/provider-status";
+} from "@/app/experiments/usage-widget/provider-status";
 
 export type Size = "small" | "medium" | "large";
 export type State = "healthy" | "tight" | "empty";

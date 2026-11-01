@@ -1,9 +1,9 @@
 "use client";
 
-import type { Effort, Model } from "@/lib/data";
-import { formatPercent } from "@/lib/format";
-import { STATUS_COLORS, getBindingWindow, getWindow } from "@/lib/provider-status";
-import { bindingCompactParams, compactStatus } from "@/lib/status-copy";
+import type { Effort, Model } from "@/app/experiments/usage-widget/data";
+import { formatPercent } from "@/app/experiments/usage-widget/format";
+import { STATUS_COLORS, getBindingWindow, getWindow } from "@/app/experiments/usage-widget/provider-status";
+import { bindingCompactParams, compactStatus } from "@/app/experiments/usage-widget/status-copy";
 import { ModelRing } from "@/components/ModelRing";
 import { EffortControl } from "@/components/EffortControl";
 

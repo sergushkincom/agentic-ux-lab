@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { BaseModel, Effort, Scenario } from "@/lib/data";
-import { EFFORT_MULTIPLIER, SCENARIO_CONFIG } from "@/lib/data";
+import type { BaseModel, Effort, Scenario } from "@/app/experiments/usage-widget/data";
+import { EFFORT_MULTIPLIER, SCENARIO_CONFIG } from "@/app/experiments/usage-widget/data";
 
 const SIM_SPEED = 60;
 

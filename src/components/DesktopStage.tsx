@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import type { Effort, Scenario, WidgetSize } from "@/lib/data";
+import type { Effort, Scenario, WidgetSize } from "@/app/experiments/usage-widget/data";
 import { Wallpaper } from "./desktop/wallpaper";
 import { MenuBar } from "./MenuBar";
 import { UsageWidget } from "./UsageWidget";
@@ -31,7 +31,7 @@ export function DesktopStage({
   );
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden">
+    <div className="desktop-stage relative h-full w-full overflow-hidden">
       <Wallpaper />
       <MenuBar />
 

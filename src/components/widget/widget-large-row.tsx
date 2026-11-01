@@ -1,17 +1,17 @@
 "use client";
 
-import type { Model } from "@/lib/data";
-import { WINDOW_SHORT } from "@/lib/copy";
-import { formatPercent } from "@/lib/format";
+import type { Model } from "@/app/experiments/usage-widget/data";
+import { WINDOW_SHORT } from "@/app/experiments/usage-widget/copy";
+import { formatPercent } from "@/app/experiments/usage-widget/format";
 import {
   STATUS_COLORS,
   getBindingWindow,
   otherWindow,
-} from "@/lib/provider-status";
+} from "@/app/experiments/usage-widget/provider-status";
 import {
   fullStatus,
   windowFullParams,
-} from "@/lib/status-copy";
+} from "@/app/experiments/usage-widget/status-copy";
 
 export function WidgetLargeRow({ model }: { model: Model }) {
   const binding = getBindingWindow(model);

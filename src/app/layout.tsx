@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AI Usage Widget — Prototype",
-  description: "macOS-style desktop widget prototype for AI usage limits",
+  title: "Agentic UX Lab",
+  description: "Interaction problems in AI and enterprise software, built rather than described.",
 };
 
 export default function RootLayout({

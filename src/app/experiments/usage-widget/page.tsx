@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Scenario, WidgetSize } from "@/lib/data";
+import type { Scenario, WidgetSize } from "@/app/experiments/usage-widget/data";
 import { DesktopStage } from "@/components/DesktopStage";
 
 export default function UsageWidgetPage() {
