@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatTime } from "@/lib/format";
+import { formatTime } from "@/app/experiments/usage-widget/format";
 
 export function MenuBar() {
   const [time, setTime] = useState<Date | null>(null);
@@ -14,7 +14,7 @@ export function MenuBar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-40 flex h-7 items-center justify-end border-b px-4"
+      className="absolute top-0 left-0 right-0 z-40 flex h-7 items-center justify-end border-b px-4"
       style={{
         background: "var(--menubar-bg)",
         backdropFilter: "blur(20px) saturate(180%)",

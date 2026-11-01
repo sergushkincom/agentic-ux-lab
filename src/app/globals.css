@@ -1,26 +1,23 @@
 @import "tailwindcss";
-
-:root {
-  color-scheme: dark;
-
-  --menubar-bg: rgba(22, 22, 24, 0.72);
-  --menubar-text: rgba(245, 245, 247, 0.92);
-  --menubar-border: rgba(255, 255, 255, 0.08);
-
-  --widget-shadow-lift: 0 20px 48px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.35);
-
-  --focus-ring: #0a84ff;
-}
+@import "./tokens.css";
 
 html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.desktop-stage {
+  color-scheme: dark;
 }
 
 /* ── Widget material ── */
@@ -116,7 +113,7 @@ body {
 /* ── Wallpaper ── */
 
 .wallpaper {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;

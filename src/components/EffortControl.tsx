@@ -1,8 +1,8 @@
 "use client";
 
-import type { Effort } from "@/lib/data";
-import { EFFORT_OPTIONS } from "@/lib/data";
-import { copy } from "@/lib/copy";
+import type { Effort } from "@/app/experiments/usage-widget/data";
+import { EFFORT_OPTIONS } from "@/app/experiments/usage-widget/data";
+import { copy } from "@/app/experiments/usage-widget/copy";
 
 type EffortControlProps = {
   value: Effort;

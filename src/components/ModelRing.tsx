@@ -1,7 +1,7 @@
 "use client";
 
 import { useId } from "react";
-import type { Model, WindowKey } from "@/lib/data";
+import type { Model, WindowKey } from "@/app/experiments/usage-widget/data";
 import {
   getAriaLabel,
   getBindingWindow,
@@ -9,7 +9,7 @@ import {
   getWindowStatus,
   NEUTRAL_RING,
   STATUS_COLORS,
-} from "@/lib/provider-status";
+} from "@/app/experiments/usage-widget/provider-status";
 import { useTweenedValue } from "@/hooks/useTweenedValue";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { ModelIcon, iconSizeForRing } from "@/components/widget/model-icon";

@@ -1,8 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Scenario, WidgetSize } from "@/lib/data";
-import { SCENARIO_CONFIG } from "@/lib/data";
+import type { Scenario, WidgetSize } from "@/app/experiments/usage-widget/data";
+import { SCENARIO_CONFIG } from "@/app/experiments/usage-widget/data";
 
 type MenuState = {
   x: number;
@@ -13,6 +13,8 @@ type WidgetContextMenuProps = {
   open: MenuState;
   size: WidgetSize;
   scenario: Scenario;
+  /** Area the menu must stay inside — the simulated desktop, not the window */
+  boundsRef: React.RefObject<HTMLElement | null>;
   onClose: () => void;
   onSizeChange: (size: WidgetSize) => void;
   onScenarioChange: (scenario: Scenario) => void;
@@ -69,6 +71,7 @@ export function WidgetContextMenu({
   open,
   size,
   scenario,
+  boundsRef,
   onClose,
   onSizeChange,
   onScenarioChange,
@@ -91,14 +94,20 @@ export function WidgetContextMenu({
 
     const menuW = 200;
     const menuH = 320;
+    const bounds = boundsRef.current?.getBoundingClientRect() ?? {
+      left: 0,
+      top: 0,
+      right: window.innerWidth,
+      bottom: window.innerHeight,
+    };
     let x = open.x;
     let y = open.y;
-    if (x + menuW > window.innerWidth) x = window.innerWidth - menuW - 8;
-    if (y + menuH > window.innerHeight) y = window.innerHeight - menuH - 8;
-    if (x < 8) x = 8;
-    if (y < 8) y = 8;
+    if (x + menuW > bounds.right) x = bounds.right - menuW - 8;
+    if (y + menuH > bounds.bottom) y = bounds.bottom - menuH - 8;
+    if (x < bounds.left + 8) x = bounds.left + 8;
+    if (y < bounds.top + 8) y = bounds.top + 8;
     setPosition({ x, y });
-  }, [open, size, scenario]);
+  }, [open, size, scenario, boundsRef]);
 
   useEffect(() => {
     if (!open) return;

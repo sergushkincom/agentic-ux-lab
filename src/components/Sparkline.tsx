@@ -1,9 +1,9 @@
 "use client";
 
-import type { ModelId } from "@/lib/data";
-import { SPARKLINE_DATA } from "@/lib/data";
-import { sparklineColor } from "@/lib/provider-status";
-import type { Model } from "@/lib/data";
+import type { ModelId } from "@/app/experiments/usage-widget/data";
+import { SPARKLINE_DATA } from "@/app/experiments/usage-widget/data";
+import { sparklineColor } from "@/app/experiments/usage-widget/provider-status";
+import type { Model } from "@/app/experiments/usage-widget/data";
 
 type SparklineProps = {
   modelId: ModelId;
