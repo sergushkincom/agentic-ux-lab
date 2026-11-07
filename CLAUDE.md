@@ -25,13 +25,17 @@ before changing behaviour or copy.
 ## Commands
 
 ```bash
-npm install
-npm run dev     # http://localhost:3000/experiments/usage-widget
-npm run build   # production build (also type-checks)
-npm run lint    # next lint (next/core-web-vitals + next/typescript)
+npm ci             # reproducible install from package-lock.json
+npm run dev        # http://localhost:3000/experiments/usage-widget
+npm run typecheck  # tsc --noEmit
+npm run build      # production build (also type-checks and lints)
+npm run lint       # next lint (next/core-web-vitals + next/typescript)
 ```
 
-There is no test suite. Verify changes by type-checking (`npx tsc --noEmit`) and running the
+GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
+`npm run lint`, and `npm run build` on Node 22 for pull requests and pushes to `main`.
+
+There is no test suite. Verify changes by type-checking (`npm run typecheck`) and running the
 dev server; right-click the widget to switch size (small/medium/large) and scenario.
 
 Stack: Next.js 15 (App Router), React 19, TypeScript (strict), Tailwind CSS v4 via

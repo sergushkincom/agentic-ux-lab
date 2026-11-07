@@ -26,6 +26,19 @@ This repo is where those questions get built. One experiment at a time.
 ## Stack
 
 Next.js · TypeScript · Tailwind CSS. Fake data throughout — no backend, no model calls.
+Install with npm from `package-lock.json` (`npm ci`).
+
+## Checks
+
+Pull requests and pushes to `main` run on Node 22 in GitHub Actions
+(`.github/workflows/ci.yml`):
+
+```bash
+npm ci
+npm run typecheck
+npm run lint
+npm run build
+```
 
 ## What this is not
 
