@@ -10,9 +10,10 @@ throughout, no backend, no model calls. Each experiment's README states the ques
 design decisions behind it, and a "Deliberately not built" list; respect that scope rather
 than adding features outside it.
 
-Currently one experiment: **02 · Usage widget** (`src/app/experiments/usage-widget/`), a
+Internal experiment in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`), a
 macOS-style desktop widget for AI usage limits. Its README is the design spec — read it
-before changing behaviour or copy.
+before changing behaviour or copy. The index also links external repos (01 workflow canvas,
+plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
 
 ## Working rules
 
@@ -28,12 +29,14 @@ before changing behaviour or copy.
 npm ci             # reproducible install from package-lock.json
 npm run dev        # http://localhost:3000/experiments/usage-widget
 npm run typecheck  # tsc --noEmit
+npm run check:registry # internal vs external lookup and href
 npm run build      # production build (also type-checks and lints)
 npm run lint       # next lint (next/core-web-vitals + next/typescript)
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
-`npm run lint`, and `npm run build` on Node 22 for pull requests and pushes to `main`.
+`npm run check:registry`, `npm run lint`, and `npm run build` on Node 22 for pull
+requests and pushes to `main`.
 
 There is no test suite. Verify changes by type-checking (`npm run typecheck`) and running the
 dev server; right-click the widget to switch size (small/medium/large) and scenario.
@@ -44,14 +47,18 @@ Stack: Next.js 15 (App Router), React 19, TypeScript (strict), Tailwind CSS v4 v
 
 ## Layout conventions
 
-- Experiments are registered in `src/lib/experiments.ts` (`slug`, `number`, `title`,
-  `question`). The home page (`src/app/page.tsx`) and the shared shell
+- Experiments are registered in `src/lib/experiments.ts` (`slug`, optional `number`,
+  `title`, `question`, optional `href`). The home page (`src/app/page.tsx`) and the shared shell
   (`src/app/experiments/layout.tsx` — back link, number, title, question; finds its entry via
-  `usePathname()`) both render from that registry. No hardcoded entries.
-- A new experiment = a registry entry + `src/app/experiments/<slug>/` with `page.tsx` and
-  `README.md` (+ a row in the root README's Experiments table). Experiment-specific logic lives
-  in that folder, not in `src/lib/`. Pages render inside the shell's `flex-1` main, so size
-  to `h-full`, not `h-screen`.
+  `usePathname()`) both render from that registry. No hardcoded entries. `experimentHref()`
+  returns `href` when set, otherwise `/experiments/<slug>`. `getExperiment(slug)` returns
+  internal rows only. An external row opens in a new tab (`rel="noopener noreferrer"`) and
+  shows an external-link marker. Leave `number` unset when the source does not publish one.
+- A new internal experiment = a registry entry + `src/app/experiments/<slug>/` with `page.tsx` and
+  `README.md` (+ a row in the root README's Experiments table). An external experiment is a
+  registry row with `href` and a README table row; it has no route in this repo.
+  Experiment-specific logic lives in that folder, not in `src/lib/`. Pages render inside the
+  shell's `flex-1` main, so size to `h-full`, not `h-screen`.
 - Colours for the lab shell/home are CSS custom properties in `src/app/tokens.css` (light +
   `prefers-color-scheme: dark`), imported by `globals.css`. Use `var(--…)`, not hex, there.
 - `src/components` and `src/hooks` currently all belong to the usage widget.
