@@ -40,6 +40,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Registry checks
+        run: npm run check:registry
+
       - name: Lint
         run: npm run lint
 
