@@ -10,10 +10,11 @@ throughout, no backend, no model calls. Each experiment's README states the ques
 design decisions behind it, and a "Deliberately not built" list; respect that scope rather
 than adding features outside it.
 
-Internal experiment in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`), a
-macOS-style desktop widget for AI usage limits. Its README is the design spec — read it
-before changing behaviour or copy. The index also links external repos (01 workflow canvas,
-plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
+Internal experiments in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`),
+a macOS-style desktop widget for AI usage limits — read its README before changing behaviour
+or copy — and **Translation trust** (`src/app/experiments/translation-trust/`), which has no
+number because no source publishes one. The index also links external repos (01 workflow
+canvas, plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
 
 ## Working rules
 
@@ -30,13 +31,14 @@ npm ci             # reproducible install from package-lock.json
 npm run dev        # http://localhost:3000/experiments/usage-widget
 npm run typecheck  # tsc --noEmit
 npm run check:registry # internal vs external lookup and href
+npm run check:translation # rewrite, restore, correct, simulated send
 npm run build      # production build (also type-checks and lints)
 npm run lint       # next lint (next/core-web-vitals + next/typescript)
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
-`npm run check:registry`, `npm run lint`, and `npm run build` on Node 22 for pull
-requests and pushes to `main`.
+`npm run check:registry`, `npm run check:translation`, `npm run lint`, and `npm run build`
+on Node 22 for pull requests and pushes to `main`.
 
 There is no test suite. Verify changes by type-checking (`npm run typecheck`) and running the
 dev server; right-click the widget to switch size (small/medium/large) and scenario.
