@@ -43,6 +43,9 @@ jobs:
       - name: Registry checks
         run: npm run check:registry
 
+      - name: Translation trust checks
+        run: npm run check:translation
+
       - name: Lint
         run: npm run lint
 

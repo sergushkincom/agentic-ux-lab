@@ -25,10 +25,15 @@ export default function ExperimentLayout({
         {experiment && (
           <>
             <span className="shrink-0 font-medium">
-              <span className="font-mono tabular-nums text-[var(--fg-muted)]">
-                {experiment.number}
-              </span>{" "}
-              · {experiment.title}
+              {experiment.number ? (
+                <>
+                  <span className="font-mono tabular-nums text-[var(--fg-muted)]">
+                    {experiment.number}
+                  </span>
+                  {" · "}
+                </>
+              ) : null}
+              {experiment.title}
             </span>
             <span className="truncate text-[var(--fg-muted)]">{experiment.question}</span>
           </>

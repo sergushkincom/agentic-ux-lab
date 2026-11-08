@@ -30,6 +30,12 @@ export const experiments: Experiment[] = [
       "When you're spending a finite allowance, what number do you actually need to see?",
   },
   {
+    slug: "translation-trust",
+    title: "Translation trust",
+    question:
+      "When a system rewrites what you say, how do you know what it changed?",
+  },
+  {
     slug: "knowledge-atlas",
     title: "Knowledge Atlas",
     question:
