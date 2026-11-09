@@ -3,20 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { BaseModel, Effort, Scenario } from "@/app/experiments/usage-widget/data";
 import { EFFORT_MULTIPLIER, SCENARIO_CONFIG } from "@/app/experiments/usage-widget/data";
-
-const SIM_SPEED = 60;
-
-function tickWindow(
-  window: BaseModel["session"],
-  burnPerMin: number,
-  deltaMin: number
-) {
-  let used = window.used + burnPerMin * deltaMin;
-  let resetsInMin = window.resetsInMin - deltaMin;
-  if (used >= 1) used = 1;
-  if (resetsInMin < 0) resetsInMin = 0;
-  return { ...window, used, resetsInMin };
-}
+import {
+  advanceModels,
+  simulatedDeltaMinutes,
+} from "@/app/experiments/usage-widget/simulate";
 
 export function useSimulation(scenario: Scenario) {
   const [models, setModels] = useState<BaseModel[]>(() =>
@@ -54,19 +44,12 @@ export function useSimulation(scenario: Scenario) {
 
     if (cfg.simulating) {
       if (lastTimeRef.current !== null) {
-        const deltaSec = (now - lastTimeRef.current) / 1000;
-        const deltaMin = deltaSec * SIM_SPEED * cfg.burnMultiplier;
+        const deltaMin = simulatedDeltaMinutes(
+          now - lastTimeRef.current,
+          cfg.burnMultiplier,
+        );
         const multiplier = EFFORT_MULTIPLIER[effortRef.current];
-
-        const next = modelsRef.current.map((m) => {
-          const sessionBurn = m.session.baseBurnPerMin * multiplier;
-          const weeklyBurn = m.weekly.baseBurnPerMin * multiplier;
-          return {
-            ...m,
-            session: tickWindow(m.session, sessionBurn, deltaMin),
-            weekly: tickWindow(m.weekly, weeklyBurn, deltaMin),
-          };
-        });
+        const next = advanceModels(modelsRef.current, multiplier, deltaMin);
 
         modelsRef.current = next;
         setModels(next);
