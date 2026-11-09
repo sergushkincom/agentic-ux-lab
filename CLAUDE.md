@@ -32,16 +32,18 @@ npm run dev        # http://localhost:3000/experiments/usage-widget
 npm run typecheck  # tsc --noEmit
 npm run check:registry # internal vs external lookup and href
 npm run check:translation # rewrite, restore, correct, simulated send
+npm test           # usage-widget formatting and limit-simulation unit tests
 npm run build      # production build (also type-checks and lints)
 npm run lint       # next lint (next/core-web-vitals + next/typescript)
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
-`npm run check:registry`, `npm run check:translation`, `npm run lint`, and `npm run build`
-on Node 22 for pull requests and pushes to `main`.
+`npm run check:registry`, `npm run check:translation`, `npm test`, `npm run lint`, and
+`npm run build` on Node 22 for pull requests and pushes to `main`.
 
-There is no test suite. Verify changes by type-checking (`npm run typecheck`) and running the
-dev server; right-click the widget to switch size (small/medium/large) and scenario.
+`npm test` uses Node's built-in test runner (`node:test`) for the usage-widget formatters
+and the pure simulation step. Also verify UI changes by running the dev server; right-click
+the widget to switch size (small/medium/large) and scenario.
 
 Stack: Next.js 15 (App Router), React 19, TypeScript (strict), Tailwind CSS v4 via
 `@tailwindcss/postcss`. Path alias `@/*` → `src/*`. Deployed on Vercel
@@ -81,9 +83,13 @@ size layout) → `widget/widget-{small,medium,large-row}` + `ModelRing`, `Sparkl
   `SCENARIO_CONFIG` defines the four demo scenarios (idle, working, burning-fast,
   limit-reached), each with starting models, whether it simulates, and default effort.
   Each model has two limit windows: `session` (5h) and `weekly` (7d).
-- **`hooks/useSimulation.ts`** — rAF loop that advances `used` and `resetsInMin` on
-  `BaseModel`s at `SIM_SPEED` (60× real time) × effort multiplier. Effort is held in a ref,
-  pushed up from `UsageWidget` via `onEffortChange`. Resets when scenario changes.
+- **`simulate.ts`** — pure step for the demo clock. `simulatedDeltaMinutes` scales elapsed
+  time by `SIM_SPEED` (60×) and the scenario burn multiplier. `advanceModels` applies the
+  effort multiplier to each window's `baseBurnPerMin`, then clamps `used` at 1 and
+  `resetsInMin` at 0.
+- **`hooks/useSimulation.ts`** — rAF loop that calls that step while the scenario is
+  simulating. Effort is held in a ref, pushed up from `UsageWidget` via `onEffortChange`.
+  Resets when scenario changes.
 - **`provider-status.ts`** — the core logic. Time-to-empty = `(1 - used) / burnPerMin`.
   Window status: `empty` (used ≥ 1), `tight` (runs out before reset), `healthy`. The
   **binding window** is whichever runs out first; the widget always leads with it.

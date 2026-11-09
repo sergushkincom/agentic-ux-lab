@@ -43,6 +43,7 @@ npm ci
 npm run typecheck
 npm run check:registry
 npm run check:translation
+npm test
 npm run lint
 npm run build
 ```
