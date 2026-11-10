@@ -4,16 +4,21 @@
 
   --bg: #fafafa;
   --surface: #ffffff;
+  --surface-strong: #f2f2f7; /* one step stronger than --bg: footer bar */
   --fg: #1d1d1f;
   --fg-muted: #6e6e73;
   --border: rgba(0, 0, 0, 0.1);
   --accent: #0066cc;
+
+  /* Site footer row; experiment shells subtract it from the viewport */
+  --footer-h: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #111113;
     --surface: #1c1c1e;
+    --surface-strong: #2c2c2e;
     --fg: #f5f5f7;
     --fg-muted: #98989d;
     --border: rgba(255, 255, 255, 0.12);

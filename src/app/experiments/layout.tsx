@@ -14,7 +14,7 @@ export default function ExperimentLayout({
   const experiment = getExperiment(slug);
 
   return (
-    <div className="flex h-dvh flex-col">
+    <div className="flex h-[calc(100dvh-var(--footer-h))] flex-col">
       <header className="flex shrink-0 items-baseline gap-x-4 gap-y-1 overflow-hidden border-b border-[var(--border)] bg-[var(--surface)] px-4 py-2.5 text-sm">
         <Link
           href="/"
