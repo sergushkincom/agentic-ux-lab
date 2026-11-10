@@ -8,6 +8,9 @@
   --fg-muted: #6e6e73;
   --border: rgba(0, 0, 0, 0.1);
   --accent: #0066cc;
+
+  /* Site footer row; experiment shells subtract it from the viewport */
+  --footer-h: 2rem;
 }
 
 @media (prefers-color-scheme: dark) {
