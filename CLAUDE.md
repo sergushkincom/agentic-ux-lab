@@ -35,11 +35,13 @@ npm run check:translation # rewrite, restore, correct, simulated send
 npm test           # usage-widget formatting and limit-simulation unit tests
 npm run build      # production build (also type-checks and lints)
 npm run lint       # next lint (next/core-web-vitals + next/typescript)
+npm run test:smoke # Playwright smoke of / and internal experiment routes (after build)
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
-`npm run check:registry`, `npm run check:translation`, `npm test`, `npm run lint`, and
-`npm run build` on Node 22 for pull requests and pushes to `main`.
+`npm run check:registry`, `npm run check:translation`, `npm test`, `npm run lint`,
+`npm run build`, and `npm run test:smoke` on the Node version in `.nvmrc` (22)
+for pull requests and pushes to `main`.
 
 `npm test` uses Node's built-in test runner (`node:test`) for the usage-widget formatters
 and the pure simulation step. Also verify UI changes by running the dev server; right-click
