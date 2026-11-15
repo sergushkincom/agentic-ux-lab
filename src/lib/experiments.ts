@@ -36,6 +36,12 @@ export const experiments: Experiment[] = [
       "When a system rewrites what you say, how do you know what it changed?",
   },
   {
+    slug: "state-comments",
+    title: "State comments",
+    question:
+      "When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page?",
+  },
+  {
     slug: "knowledge-atlas",
     title: "Knowledge Atlas",
     question:
