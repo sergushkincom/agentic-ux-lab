@@ -9,6 +9,10 @@ breaks, and take it back into Figma once the interaction is settled.
 
 This repo is where those questions get built. One experiment at a time.
 
+![The usage widget in use: switching effort from Medium to High turns Opus from "44m left" to "5m early", then the large size shows the same flip with the advisory "Medium effort would last past the reset."](./docs/usage-widget.gif)
+
+*Effort is a lever: Medium → High flips Opus from "44m left" to "5m early". Right-click switches the size, as on a real widget.*
+
 ![A macOS desktop widget showing Opus will run out about 18 minutes before its limit resets](./preview.png)
 
 *The widget reports the window that runs out first, and says so in time — not percent.*
