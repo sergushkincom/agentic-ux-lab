@@ -10,14 +10,15 @@ A person who lands on the repo and needs to see the interaction, not only read a
 
 ## What runs in this repo
 
-Two experiments are routes here. Both are on the lab site, and both lead the README as a short GIF.
+Three experiments are routes here. Usage widget and Translation trust are on the lab site and lead the README as a short GIF. State comments is a route here and has no README GIF yet.
 
 | Experiment | Question | Live | README |
 | --- | --- | --- | --- |
 | 02 · Usage widget | When you're spending a finite allowance, what number do you actually need to see? | [Live](https://agentic-ux-lab.vercel.app/experiments/usage-widget) | `docs/usage-widget.gif` |
 | Translation trust | When a system rewrites what you say, how do you know what it changed? | [Live](https://agentic-ux-lab.vercel.app/experiments/translation-trust) | `docs/translation-trust.gif` |
+| State comments | When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page? | Route `/experiments/state-comments` | — |
 
-Translation trust has no number. The source does not publish one.
+Translation trust and State comments have no number. The source does not publish one.
 
 The usage-widget GIF is the widget in use: effort goes from Medium to High, and the binding window flips from time left to time early. Right-click changes the size.
 
@@ -53,6 +54,8 @@ Shipped and live:
 - Home cards lift on hover, and stay still when reduced motion is on.
 - Open Graph image for links to the site.
 - Unit tests for the usage-widget formatters and the translation-trust script, plus the Playwright smoke.
+
+State comments is a route on this branch. It pins feedback to the step, the open picker, and the frame width. It is not on the lab site until this branch merges.
 
 ## Out of scope
 

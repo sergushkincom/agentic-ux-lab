@@ -12,8 +12,9 @@ than adding features outside it.
 
 Internal experiments in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`),
 a macOS-style desktop widget for AI usage limits — read its README before changing behaviour
-or copy — and **Translation trust** (`src/app/experiments/translation-trust/`), which has no
-number because no source publishes one. The index also links external repos (01 workflow
+or copy — **Translation trust** (`src/app/experiments/translation-trust/`), and **State comments**
+(`src/app/experiments/state-comments/`). Translation trust and State comments have no number
+because no source publishes one. The index also links external repos (01 workflow
 canvas, plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
 
 ## Working rules
