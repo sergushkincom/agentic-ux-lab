@@ -155,3 +155,9 @@ vite.config.ts.timestamp-*
 public/wallpaper/*
 !public/wallpaper/.gitkeep
 !public/wallpaper/README.md
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

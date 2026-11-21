@@ -12,8 +12,9 @@ than adding features outside it.
 
 Internal experiments in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`),
 a macOS-style desktop widget for AI usage limits — read its README before changing behaviour
-or copy — and **Translation trust** (`src/app/experiments/translation-trust/`), which has no
-number because no source publishes one. The index also links external repos (01 workflow
+or copy — **Translation trust** (`src/app/experiments/translation-trust/`), and **State comments**
+(`src/app/experiments/state-comments/`). Translation trust and State comments have no number
+because no source publishes one. The index also links external repos (01 workflow
 canvas, plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
 
 ## Working rules
@@ -35,11 +36,13 @@ npm run check:translation # rewrite, restore, correct, simulated send
 npm test           # usage-widget formatting and limit-simulation unit tests
 npm run build      # production build (also type-checks and lints)
 npm run lint       # next lint (next/core-web-vitals + next/typescript)
+npm run test:smoke # Playwright smoke of / and internal experiment routes (after build)
 ```
 
 GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
-`npm run check:registry`, `npm run check:translation`, `npm test`, `npm run lint`, and
-`npm run build` on Node 22 for pull requests and pushes to `main`.
+`npm run check:registry`, `npm run check:translation`, `npm test`, `npm run lint`,
+`npm run build`, and `npm run test:smoke` on the Node version in `.nvmrc` (22)
+for pull requests and pushes to `main`.
 
 `npm test` uses Node's built-in test runner (`node:test`) for the usage-widget formatters
 and the pure simulation step. Also verify UI changes by running the dev server; right-click

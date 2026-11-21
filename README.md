@@ -9,6 +9,14 @@ breaks, and take it back into Figma once the interaction is settled.
 
 This repo is where those questions get built. One experiment at a time.
 
+![The usage widget in use: switching effort from Medium to High turns Opus from "44m left" to "5m early", then the large size shows the same flip with the advisory "Medium effort would last past the reset."](./docs/usage-widget.gif)
+
+*Effort is a lever: Medium → High flips Opus from "44m left" to "5m early". Right-click switches the size, as on a real widget.*
+
+[![Translation trust: the rewrite marks a softened line, a left-out cause, and an unsure sentence. Show original, open the softened line, and Restore puts "The parts will be late." back.](./docs/translation-trust.gif)](https://agentic-ux-lab.vercel.app/experiments/translation-trust)
+
+*[Translation trust](https://agentic-ux-lab.vercel.app/experiments/translation-trust): the original stays one click away, and Restore puts "The parts will be late." back in the note.*
+
 ![A macOS desktop widget showing Opus will run out about 18 minutes before its limit resets](./preview.png)
 
 *The widget reports the window that runs out first, and says so in time — not percent.*
@@ -23,7 +31,7 @@ This repo is where those questions get built. One experiment at a time.
 |---|------------|-------------------------|------|
 | 01 | Workflow canvas | What does an interface look like when a system is honest about not knowing, and hands the decision back to a person? | [Live →](https://denys-workflow-canvas.vercel.app/experiments/workflow-canvas) |
 | 02 | [Usage widget](src/app/experiments/usage-widget) | When you're spending a finite allowance, what number do you actually need to see? | [Live →](https://agentic-ux-lab.vercel.app/experiments/usage-widget) |
-| | [Translation trust](src/app/experiments/translation-trust) | When a system rewrites what you say, how do you know what it changed? | Route `/experiments/translation-trust` |
+| | [Translation trust](src/app/experiments/translation-trust) | When a system rewrites what you say, how do you know what it changed? | [Live →](https://agentic-ux-lab.vercel.app/experiments/translation-trust) |
 | | [State comments](src/app/experiments/state-comments) | When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page? | Route `/experiments/state-comments` |
 | | Knowledge Atlas | What if the way an AI sorted your notes were something you could see, question and overrule, and the AI then left your correction alone? | [Live →](https://denys-knowledge-atlas.vercel.app) |
 | | Keyword Tracker | A keyword rank tracker where the table is the chart — a clickable prototype in React and TypeScript. | [Live →](https://denys-keyword-tracker.vercel.app) |
@@ -36,7 +44,8 @@ Install with npm from `package-lock.json` (`npm ci`).
 
 ## Checks
 
-Pull requests and pushes to `main` run on Node 22 in GitHub Actions
+Pull requests and pushes to `main` run on the Node version pinned in `.nvmrc`
+(22, also declared as `22.x` in `package.json` `engines`) in GitHub Actions
 (`.github/workflows/ci.yml`):
 
 ```bash
@@ -47,7 +56,11 @@ npm run check:translation
 npm test
 npm run lint
 npm run build
+npm run test:smoke
 ```
+
+`npm run test:smoke` is a Playwright pass over the site index and every internal
+experiment route. Run `npm run build` first; it uses that production build.
 
 ## What this is not
 

@@ -15,9 +15,9 @@ concurrency:
 
 jobs:
   verify:
-    name: Typecheck, test, lint, and build
+    name: Typecheck, test, lint, build, and smoke
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     env:
       CI: true
       # Avoid a network call to Next.js telemetry during lint and build.
@@ -29,9 +29,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          # Node 22 meets Next.js 15.5 (^18.18 || ^19.8 || >=20) and ESLint 9
-          # (^18.18 || ^20.9 || >=21.1). The lockfile's @types/node is 22.x.
-          node-version: 22
+          # Pinned in .nvmrc and package.json engines. Node 22 meets Next.js 15.5
+          # (^18.18 || ^19.8 || >=20) and ESLint 9 (^18.18 || ^20.9 || >=21.1).
+          # The lockfile's @types/node is 22.x.
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Install dependencies
@@ -54,3 +55,9 @@ jobs:
 
       - name: Production build
         run: npm run build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Playwright smoke
+        run: npm run test:smoke
