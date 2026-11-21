@@ -64,6 +64,15 @@ for (const route of routes) {
       await expect(page.getByText(experiment.title).first()).toBeVisible();
     } else {
       await expect(page.getByRole("heading", { level: 1, name: "Agentic UX Lab" })).toBeVisible();
+      await expect(page.locator(".specimen-card")).toHaveCount(experiments.length);
+      for (const entry of experiments) {
+        const card = page.locator(".specimen-card", { hasText: entry.title });
+        await expect(card, entry.slug).toBeVisible();
+        await expect(card, entry.slug).toHaveAttribute("href", experimentHref(entry));
+        if (entry.href) {
+          await expect(card, entry.slug).toHaveAttribute("target", "_blank");
+        }
+      }
     }
 
     await assertNotNextErrorPage(page, route);
