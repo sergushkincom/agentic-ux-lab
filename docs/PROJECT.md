@@ -25,7 +25,7 @@ The Translation trust GIF is the note a sender would send. Show original puts th
 
 The index also links experiments that live in other repos: Workflow canvas (01), Knowledge Atlas, Keyword Tracker, and Permission rings. Those are not routes in this app.
 
-The home page is a text list of those experiments. Each internal experiment has its own README: the question, the decisions, and a list of what was deliberately not built.
+The home page is a grid of cards. Each card shows a drawn preview of that prototype and lifts slightly on hover. The lift is off when the system asks for reduced motion. A new experiment without a drawing yet still gets a plain plate. Each internal experiment has its own README: the question, the decisions, and a list of what was deliberately not built.
 
 ## Stack and checks
 
@@ -49,7 +49,8 @@ Shipped and live:
 
 - Usage widget, with the README GIF and the two stills under it.
 - Translation trust, with a live link in the experiments table and a README GIF beside the usage-widget GIF.
-- Registry-driven index and experiment shell.
+- Registry-driven index and experiment shell. The index is a card grid with a preview of each experiment.
+- Home cards lift on hover, and stay still when reduced motion is on.
 - Open Graph image for links to the site.
 - Unit tests for the usage-widget formatters and the translation-trust script, plus the Playwright smoke.
 
