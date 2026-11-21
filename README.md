@@ -13,6 +13,10 @@ This repo is where those questions get built. One experiment at a time.
 
 *Effort is a lever: Medium → High flips Opus from "44m left" to "5m early". Right-click switches the size, as on a real widget.*
 
+[![Translation trust: the rewrite marks a softened line, a left-out cause, and an unsure sentence. Show original, open the softened line, and Restore puts "The parts will be late." back.](./docs/translation-trust.gif)](https://agentic-ux-lab.vercel.app/experiments/translation-trust)
+
+*[Translation trust](https://agentic-ux-lab.vercel.app/experiments/translation-trust): the original stays one click away, and Restore puts "The parts will be late." back in the note.*
+
 ![A macOS desktop widget showing Opus will run out about 18 minutes before its limit resets](./preview.png)
 
 *The widget reports the window that runs out first, and says so in time — not percent.*
