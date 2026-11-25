@@ -12,9 +12,10 @@ than adding features outside it.
 
 Internal experiments in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`),
 a macOS-style desktop widget for AI usage limits — read its README before changing behaviour
-or copy — **Translation trust** (`src/app/experiments/translation-trust/`), and **State comments**
-(`src/app/experiments/state-comments/`). Translation trust and State comments have no number
-because no source publishes one. The index also links external repos (01 workflow
+or copy — **Translation trust** (`src/app/experiments/translation-trust/`), **State comments**
+(`src/app/experiments/state-comments/`), and **Silent approvals**
+(`src/app/experiments/silent-approvals/`). Translation trust, State comments and Silent approvals
+have no number because no source publishes one. The index also links external repos (01 workflow
 canvas, plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
 
 ## Working rules
@@ -33,7 +34,7 @@ npm run dev        # http://localhost:3000/experiments/usage-widget
 npm run typecheck  # tsc --noEmit
 npm run check:registry # internal vs external lookup and href
 npm run check:translation # rewrite, restore, correct, simulated send
-npm test           # usage-widget formatting and limit-simulation unit tests
+npm test           # unit tests: usage widget, state comments, home previews, silent approvals
 npm run build      # production build (also type-checks and lints)
 npm run lint       # next lint (next/core-web-vitals + next/typescript)
 npm run test:smoke # Playwright smoke of / and internal experiment routes (after build)

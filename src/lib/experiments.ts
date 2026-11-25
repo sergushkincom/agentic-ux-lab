@@ -42,6 +42,12 @@ export const experiments: Experiment[] = [
       "When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page?",
   },
   {
+    slug: "silent-approvals",
+    title: "Silent approvals",
+    question:
+      "One flow waiting for a person is honest. When forty are waiting, how does a person approve by what would happen, not one by one?",
+  },
+  {
     slug: "knowledge-atlas",
     title: "Knowledge Atlas",
     question:
