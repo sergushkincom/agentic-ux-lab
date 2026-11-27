@@ -67,3 +67,5 @@ Each experiment README lists what that screen does not do. In short: no model ca
 - Fake data only. Do not add real company names or real people.
 - One experiment answers one question. Do not widen a screen past its README.
 - Owner: Denys Sergushkin. He merges.
+
+State comments: a new comment opens into the list and a short highlight fades. The empty filter shows an icon, a line, and Show resolved. Reduced motion keeps both still.

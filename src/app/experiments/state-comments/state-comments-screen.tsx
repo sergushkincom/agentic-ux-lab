@@ -8,6 +8,7 @@ import {
   writeStoredComments,
   type PrototypeComment,
 } from "./comments-store";
+import styles from "./comments-motion.module.css";
 import {
   DEFAULT_STATE,
   FRAME_WIDTH_VALUES,
@@ -38,6 +39,7 @@ export function StateCommentsScreen() {
   const [draftComment, setDraftComment] = useState("");
   const [hideResolved, setHideResolved] = useState(false);
   const [copyFeedbackId, setCopyFeedbackId] = useState<string | null>(null);
+  const [freshId, setFreshId] = useState<string | null>(null);
   const [selectedPerson, setSelectedPerson] = useState(PEOPLE[0]);
   const [selectedTime, setSelectedTime] = useState(TIME_SLOTS[1]);
   const [urlStateReady, setUrlStateReady] = useState(false);
@@ -99,6 +101,14 @@ export function StateCommentsScreen() {
     return () => window.clearTimeout(timeout);
   }, [copyFeedbackId]);
 
+  useEffect(() => {
+    if (!freshId) {
+      return;
+    }
+    const timeout = window.setTimeout(() => setFreshId(null), 2_500);
+    return () => window.clearTimeout(timeout);
+  }, [freshId]);
+
   const visibleComments = useMemo(
     () => (hideResolved ? comments.filter((comment) => !comment.resolved) : comments),
     [comments, hideResolved],
@@ -138,6 +148,7 @@ export function StateCommentsScreen() {
       createdAt: new Date().toISOString(),
     };
 
+    setFreshId(nextComment.id);
     setComments((prev) => [nextComment, ...prev]);
     setDraftComment("");
   };
@@ -307,49 +318,26 @@ export function StateCommentsScreen() {
               </button>
             </form>
 
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-4">
               {visibleComments.length === 0 ? (
-                <li className="rounded-lg border border-dashed border-[var(--border)] px-3 py-4 text-sm text-[var(--fg-muted)]">
-                  No comments in this filter.
-                </li>
+                <EmptyFilter
+                  filtered={hideResolved}
+                  onShowResolved={() => setHideResolved(false)}
+                />
               ) : null}
 
-              {visibleComments.map((comment) => (
-                <li
+              {visibleComments.map((comment, index) => (
+                <CommentItem
                   key={comment.id}
-                  className={`rounded-lg border border-[var(--border)] p-2 ${
-                    comment.resolved ? "bg-[var(--surface-strong)] text-[var(--fg-muted)]" : "bg-[var(--surface)]"
-                  }`}
-                >
-                  <button
-                    type="button"
-                    className="w-full rounded-md px-2 py-1 text-left"
-                    onClick={() => restoreCommentState(comment.state)}
-                  >
-                    <p className="text-sm">{comment.text}</p>
-                    <p className="mt-1 text-xs">
-                      <span className="rounded-md bg-[var(--surface-strong)] px-2 py-0.5">
-                        {formatStateChip(comment.state)}
-                      </span>
-                    </p>
-                  </button>
-                  <div className="mt-2 flex flex-wrap gap-2 px-2 pb-1">
-                    <button
-                      type="button"
-                      className="rounded-md border border-[var(--border)] px-2 py-1 text-xs"
-                      onClick={() => toggleResolved(comment.id)}
-                    >
-                      {comment.resolved ? "Mark unresolved" : "Mark resolved"}
-                    </button>
-                    <button
-                      type="button"
-                      className="rounded-md border border-[var(--border)] px-2 py-1 text-xs"
-                      onClick={() => void copyCommentLink(comment.state, comment.id)}
-                    >
-                      {copyFeedbackId === comment.id ? "Copied" : "Copy link"}
-                    </button>
-                  </div>
-                </li>
+                  comment={comment}
+                  arriving={comment.id === freshId}
+                  reducedMotion={reducedMotion}
+                  spaced={index < visibleComments.length - 1}
+                  copied={copyFeedbackId === comment.id}
+                  onRestore={restoreCommentState}
+                  onToggleResolved={toggleResolved}
+                  onCopyLink={copyCommentLink}
+                />
               ))}
             </ul>
           </div>
@@ -359,6 +347,162 @@ export function StateCommentsScreen() {
         {copyFeedbackId ? "State link copied to clipboard." : ""}
       </p>
     </div>
+  );
+}
+
+function useArriveOpen(arriving: boolean, reduced: boolean): boolean {
+  const [open, setOpen] = useState(!arriving || reduced);
+
+  useEffect(() => {
+    if (!arriving || reduced) {
+      setOpen(true);
+      return;
+    }
+
+    setOpen(false);
+    let followUp = 0;
+    const first = window.requestAnimationFrame(() => {
+      followUp = window.requestAnimationFrame(() => setOpen(true));
+    });
+
+    return () => {
+      window.cancelAnimationFrame(first);
+      window.cancelAnimationFrame(followUp);
+    };
+  }, [arriving, reduced]);
+
+  return open;
+}
+
+function EmptyFilter({
+  filtered,
+  onShowResolved,
+}: {
+  filtered: boolean;
+  onShowResolved: () => void;
+}) {
+  return (
+    <li
+      role="status"
+      className="rounded-lg border border-dashed border-[var(--border)] px-4 py-6 text-center"
+    >
+      <EmptyCommentsIcon />
+      <p className="mt-2 text-sm text-[var(--fg-muted)]">
+        {filtered ? "No open comments." : "No comments yet."}
+      </p>
+      {filtered ? (
+        <button
+          type="button"
+          className="mt-3 rounded-md border border-[var(--border)] bg-[var(--surface)] px-2.5 py-1 text-xs font-medium text-[var(--fg)]"
+          onClick={onShowResolved}
+        >
+          Show resolved
+        </button>
+      ) : null}
+    </li>
+  );
+}
+
+function EmptyCommentsIcon() {
+  return (
+    <svg
+      viewBox="0 0 32 32"
+      width="32"
+      height="32"
+      aria-hidden="true"
+      className="mx-auto text-[var(--fg-muted)]"
+      fill="none"
+    >
+      <rect
+        x="5.5"
+        y="6.5"
+        width="21"
+        height="14"
+        rx="3.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+      />
+      <path
+        d="M12 26.5 14.8 20.5H20"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CommentItem({
+  comment,
+  arriving,
+  reducedMotion,
+  spaced,
+  copied,
+  onRestore,
+  onToggleResolved,
+  onCopyLink,
+}: {
+  comment: PrototypeComment;
+  arriving: boolean;
+  reducedMotion: boolean;
+  spaced: boolean;
+  copied: boolean;
+  onRestore: (state: PrototypeState) => void;
+  onToggleResolved: (id: string) => void;
+  onCopyLink: (state: PrototypeState, commentId: string) => void;
+}) {
+  const open = useArriveOpen(arriving, reducedMotion);
+  const highlight = arriving && !reducedMotion;
+
+  return (
+    <li
+      data-comment-id={comment.id}
+      data-open={open ? "true" : "false"}
+      className={arriving ? `${styles.row} ${styles.live}` : styles.row}
+    >
+      <div className={styles.clip}>
+        <div className={spaced ? "pb-2" : undefined}>
+          <div
+            data-highlight={highlight ? "on" : "off"}
+            className={`rounded-lg border border-[var(--border)] p-2 ${
+              comment.resolved
+                ? "bg-[var(--surface-strong)] text-[var(--fg-muted)]"
+                : "bg-[var(--surface)]"
+            } ${highlight ? styles.wash : ""}`}
+          >
+            <button
+              type="button"
+              className="w-full rounded-md px-2 py-1 text-left"
+              onClick={() => onRestore(comment.state)}
+            >
+              <p className="text-sm">{comment.text}</p>
+              <p className="mt-1 text-xs">
+                <span className="rounded-md bg-[var(--surface-strong)] px-2 py-0.5">
+                  {formatStateChip(comment.state)}
+                </span>
+              </p>
+            </button>
+            <div className="mt-2 flex flex-wrap gap-2 px-2 pb-1">
+              <button
+                type="button"
+                className="rounded-md border border-[var(--border)] px-2 py-1 text-xs"
+                onClick={() => onToggleResolved(comment.id)}
+              >
+                {comment.resolved ? "Mark unresolved" : "Mark resolved"}
+              </button>
+              <button
+                type="button"
+                className="rounded-md border border-[var(--border)] px-2 py-1 text-xs"
+                onClick={() => onCopyLink(comment.state, comment.id)}
+              >
+                {copied ? "Copied" : "Copy link"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
   );
 }
 
