@@ -30,7 +30,12 @@ to recreate mobile breakpoints while reviewing on a larger screen.
 
 **4. Resolved comments stay visible until filtered.**
 Resolved items are greyed out in place, so context is preserved. A hide-resolved toggle lets
-reviewers narrow focus without erasing history.
+reviewers narrow focus without erasing history. When that filter hides every comment, the
+panel shows an empty state: an icon, one line, and Show resolved, which turns the filter off.
+A comment just added opens into the list (height and opacity) and a short highlight fades.
+Both stay still when reduced motion is on. The arrival and the empty state follow an idea
+from [Plannotator](https://github.com/backnotprop/plannotator) (Apache-2.0). The code is written
+for this lab.
 
 ## Deliberately not built
 
