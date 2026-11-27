@@ -42,6 +42,12 @@ export const experiments: Experiment[] = [
       "When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page?",
   },
   {
+    slug: "sourced-answers",
+    title: "Sourced answers",
+    question:
+      "When an assistant answers from your documents, how do you tell a sentence that rests on a source from a confident guess, without reading every source?",
+  },
+  {
     slug: "knowledge-atlas",
     title: "Knowledge Atlas",
     question:
