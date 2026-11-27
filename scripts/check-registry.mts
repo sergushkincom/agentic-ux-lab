@@ -44,7 +44,7 @@ for (const slug of externalSlugs) {
 const internal = experiments.filter((experiment) => !experiment.href);
 assert.deepEqual(
   internal.map((experiment) => experiment.slug),
-  ["usage-widget", "translation-trust", "state-comments"],
+  ["usage-widget", "translation-trust", "state-comments", "absence-coverage"],
 );
 
 console.log("registry checks passed");

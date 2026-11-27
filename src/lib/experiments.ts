@@ -42,6 +42,12 @@ export const experiments: Experiment[] = [
       "When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page?",
   },
   {
+    slug: "absence-coverage",
+    title: "Absence coverage",
+    question:
+      "When an assistant covers for you for a week, what was it allowed to do, who decided, and what do you read first on Monday morning?",
+  },
+  {
     slug: "knowledge-atlas",
     title: "Knowledge Atlas",
     question:
