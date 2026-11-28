@@ -12,9 +12,10 @@ than adding features outside it.
 
 Internal experiments in this repo: **02 · Usage widget** (`src/app/experiments/usage-widget/`),
 a macOS-style desktop widget for AI usage limits — read its README before changing behaviour
-or copy — **Translation trust** (`src/app/experiments/translation-trust/`), and **State comments**
-(`src/app/experiments/state-comments/`). Translation trust and State comments have no number
-because no source publishes one. The index also links external repos (01 workflow
+or copy — **Translation trust** (`src/app/experiments/translation-trust/`), **State comments**
+(`src/app/experiments/state-comments/`), and **Draft review**
+(`src/app/experiments/draft-review/`). Translation trust, State comments and Draft review
+have no number because no source publishes one. The index also links external repos (01 workflow
 canvas, plus knowledge-atlas, keyword-tracker and permission-rings, which publish no number).
 
 ## Working rules
@@ -44,8 +45,8 @@ GitHub Actions (`.github/workflows/ci.yml`) runs `npm ci`, `npm run typecheck`,
 `npm run build`, and `npm run test:smoke` on the Node version in `.nvmrc` (22)
 for pull requests and pushes to `main`.
 
-`npm test` uses Node's built-in test runner (`node:test`) for the usage-widget formatters
-and the pure simulation step. Also verify UI changes by running the dev server; right-click
+`npm test` uses Node's built-in test runner (`node:test`) for the usage-widget formatters,
+the pure simulation step, and the draft-review rules. Also verify UI changes by running the dev server; right-click
 the widget to switch size (small/medium/large) and scenario.
 
 Stack: Next.js 15 (App Router), React 19, TypeScript (strict), Tailwind CSS v4 via
