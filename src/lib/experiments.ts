@@ -42,6 +42,12 @@ export const experiments: Experiment[] = [
       "When someone leaves feedback on a running prototype, how does the next person land on exactly the moment it was about: the step, the open picker and the screen width, not just the page?",
   },
   {
+    slug: "draft-review",
+    title: "Draft review",
+    question:
+      "When an assistant writes a draft for you, how do you review it in less time than writing it, change what matters, and still own the result?",
+  },
+  {
     slug: "knowledge-atlas",
     title: "Knowledge Atlas",
     question:
